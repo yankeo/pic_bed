@@ -1,0 +1,39 @@
+name: Image Processing Workflow
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'pic/**'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.x'
+
+    - name: Install dependencies
+      run: |
+        pip install Pillow
+
+    - name: Generate Thumbnails
+      run: |
+        python .github/scripts/generate_thumbnails.py
+
+    - name: Scan Images
+      run: |
+        python .github/scripts/scan_images.py
+
+    - name: Commit and Push Changes
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git add minipic pic.json
+        git commit -m "Update thumbnails and image stats"
+        git push
