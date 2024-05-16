@@ -32,6 +32,8 @@ jobs:
 
     - name: Commit and Push Changes
       run: |
+        git config --global user.email "610134992@qq.com"
+        git config --global user.name "yankeo"
         git add minipic pic.json
         git commit -m "Update thumbnails and image stats"
         git push
