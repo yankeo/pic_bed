@@ -32,8 +32,6 @@ jobs:
 
     - name: Commit and Push Changes
       run: |
-        git config --local user.email "action@github.com"
-        git config --local user.name "GitHub Action"
         git add minipic pic.json
         git commit -m "Update thumbnails and image stats"
         git push
